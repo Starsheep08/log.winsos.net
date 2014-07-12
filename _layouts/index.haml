@@ -11,7 +11,7 @@
         = content
 
         - if @scope.limit > 0
-          - posts = @contents.list_lasts(@scope.limit)
+          - posts = @contents.list_lasts_posts(@scope.limit)
           - post = posts.first
           .phare
             %h1.icon-comments-alt
@@ -21,7 +21,7 @@
               %ul.tags
                 - post.tags.each do |tag|
                   %li
-                    %a.icon-tag{:href => link_to("tags/#{tag}")}
+                    %a.icon-tag{:href => link_to("tags/posts/#{tag}")}
                       = tag
               - if post.image?
                 %img{:src => post.image}
@@ -50,7 +50,7 @@
           - if @scope.title?
             %h1= spanify @scope.title
           %ul.post-list
-            - posts = @contents.list_by_date
+            - posts = @contents.list_posts_by_date
             - posts.keys.sort.reverse.each do |year|
               - year_posts = posts[year]
               %li
